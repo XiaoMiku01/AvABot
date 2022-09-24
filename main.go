@@ -9,6 +9,8 @@ import (
 	// 其他模块
 	// _ "github.com/Mrs4s/go-cqhttp/db/mongodb"    // mongodb 数据库支持
 	// _ "github.com/Mrs4s/go-cqhttp/modules/pprof" // pprof 性能分析
+
+	_ "github.com/Mrs4s/go-cqhttp/plugins" // 插件
 )
 
 func main() {

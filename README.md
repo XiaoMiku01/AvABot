@@ -1,15 +1,82 @@
 <p align="center">
   <a href="https://ishkong.github.io/go-cqhttp-docs/">
+    <img src="https://raw.githubusercontent.com/XiaoMiku01/PicGo/master/imagesDSF)%60Y%7EM9T1Y1I%5B46O4%402DW.gif" width="200" height="200" alt="go-cqhttp">
+  </a>
+</p>
+
+
+<div align="center">
+
+# AvABot
+
+_✨ 在  [go-cqhttp](https://github.com/Mrs4s/go-cqhttp)  上直接实现的 **B站** 、**抖音** 、**微博** 动态推送机器人 ✨_  
+
+</div>
+
+## 使用说明
+
+### 登录
+
+同 [go-cqhttp](https://github.com/Mrs4s/go-cqhttp) , 详见 [go-cqhttp 文档](https://docs.go-cqhttp.org/) 
+
+##### 注意: 
+
+首次打开会自动下载 **playwright 浏览器** ，国内下载可能较慢。还会生成一个 `pusher_config.yaml`  文件，`master_id` 改为自己的QQ ，Bot 只会识别此QQ号的命令。由于需要 **playwright**  进行截图，目前此机器人只能运行在 **windows** 和 **ubuntu** **amd64** 位**系统**上。
+
+
+
+## 命令 (目前只支持群聊)
+
+#### /help
+
+获取帮助菜单  
+
+<img src="https://raw.githubusercontent.com/XiaoMiku01/PicGo/master/imagesimage-20220924154459864.png" alt="image-20220924154459864" width="500" />  
+
+微博ID : 需要关注的人微博主页 ->  右上角菜单 -> 复制链接  ，链接后的数字为微博ID
+
+抖音主页链接：需要关注的人抖音主页 ->  右上角菜单 -> 分享主页 -> 复制链接
+
+#### 关注列表 （没有斜杠）
+
+获取当前群所关注的用户  
+
+ <img src="https://raw.githubusercontent.com/XiaoMiku01/PicGo/master/imagesimage-20220924155553678.png" alt="image-20220924155553678" swidth="500" />
+
+## 功能
+
+### B站
+
+- 用户动态推送
+- 用户个人信息更变通知（昵称，签名，头像，所戴装扮）
+- 直播间信息通知 （上下播，直播间封面，标题更换）
+
+#### 微博
+
+- 最新微博发表推送
+
+#### 抖音
+
+- 最新抖音推送（会自动将原视频发送到需要的群中） 
+
+### 效果展示
+
+<img src="https://raw.githubusercontent.com/XiaoMiku01/PicGo/master/imagesimage-20220924161208982.png" alt="image-20220924161208982" height="200" /><img src="https://raw.githubusercontent.com/XiaoMiku01/PicGo/master/imagesimage-20220924161518171.png" alt="image-20220924161518171" height="200" /><img src="https://raw.githubusercontent.com/XiaoMiku01/PicGo/master/imagesimage-20220924161108625.png" alt="image-20220924161108625" height="200" /><img src="https://raw.githubusercontent.com/XiaoMiku01/PicGo/master/imagesimage-20220924161352464.png" alt="image-20220924161352464" height="200" />
+
+---
+
+ <p align="center">
+  <a href="https://ishkong.github.io/go-cqhttp-docs/">
     <img src="https://user-images.githubusercontent.com/25968335/120111974-8abef880-c139-11eb-99cd-fa928348b198.png" width="200" height="200" alt="go-cqhttp">
   </a>
 </p>
+
 
 <div align="center">
 
 # go-cqhttp
 
 _✨ 基于 [Mirai](https://github.com/mamoe/mirai) 以及 [MiraiGo](https://github.com/Mrs4s/MiraiGo) 的 [OneBot](https://github.com/howmanybots/onebot/blob/master/README.md) Golang 原生实现 ✨_  
-
 
 </div>
 

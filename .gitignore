@@ -9,3 +9,5 @@ data/
 logs/
 internal/btree/*.lock
 internal/btree/*.db
+AvABot.exe
+AvABot

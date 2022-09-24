@@ -15,6 +15,10 @@ _✨ 在  [go-cqhttp](https://github.com/Mrs4s/go-cqhttp)  上直接实现的 **
 
 ## 使用说明
 
+### 下载二进制文件或自己 clone 编译
+
+下载地址: [AvABot v1.0.0](https://github.com/XiaoMiku01/AvABot/releases/tag/v1.0.0)
+
 ### 登录
 
 同 [go-cqhttp](https://github.com/Mrs4s/go-cqhttp) , 详见 [go-cqhttp 文档](https://docs.go-cqhttp.org/) 

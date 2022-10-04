@@ -443,16 +443,18 @@ func TikTokStart(tkuser *tiktok.TikTokUser, bot *coolq.CQBot) {
 				}
 			}
 		}
-		videoMsg, err := bot.Client.UploadShortVideo(target, video, img, 1)
-		if err != nil {
-			log.Println(err)
-			msg.Append(message.NewText(fmt.Sprintf("%s 抖音新作品：\n%s\n 视频下载失败，观看链接：https://www.douyin.com/video/%s", tkuser.Name, aweme.Desc, aweme.AwemeId)))
-			for _, groupId := range tkuser.GroupList {
-				bot.Client.SendGroupMessage(groupId, msg)
+		if video != nil && len(videoBinary) > 0 {
+			videoMsg, err := bot.Client.UploadShortVideo(target, video, img, 1)
+			if err != nil {
+				log.Warnln(err)
+				msg.Append(message.NewText(fmt.Sprintln("视频下载失败")))
+				for _, groupId := range tkuser.GroupList {
+					bot.Client.SendGroupMessage(groupId, msg)
+				}
+				continue
 			}
-			continue
+			msg.Append(videoMsg)
 		}
-		msg.Append(videoMsg)
 		for _, groupId := range tkuser.GroupList {
 			bot.Client.SendGroupMessage(groupId, msg0)
 			bot.Client.SendGroupMessage(groupId, msg)

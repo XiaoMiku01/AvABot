@@ -458,7 +458,7 @@ func (u *User) ListenUser() {
 			img, _ := DownloadImg(u.OtherInfo.Data[0].Face)
 			u.MsgChan <- PushMsg{
 				Type: "other",
-				Msg:  fmt.Sprintf("%s 头像变更", u.OtherInfo.Data[0].Face),
+				Msg:  fmt.Sprintf("%s 头像变更", u.Uname),
 				Img:  img,
 			}
 		}

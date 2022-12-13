@@ -97,7 +97,10 @@ func NewTikTokUser(url string, init bool, groupIds ...int64) (*TikTokUser, error
 
 func (tk *TikTokUser) GetLastAweme() error {
 	api := fmt.Sprintf("https://m.douyin.com/web/api/v2/aweme/post/?reflow_source=reflow_page&sec_uid=%s&count=21&max_cursor=0", tk.SecId)
-	resp, err := http.Get(api)
+	client := &http.Client{}
+	req, err := http.NewRequest("GET", api, nil)
+	req.Header.Set("User-Agent", "Mozill/a/5.0 (iPhone; CPU iPhone OS 13_2_3 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/13.0.3 Mobile/15E148 Safari/604.1 Edg/108.0.0.0")
+	resp, err := client.Do(req)
 	if err != nil {
 		log.Warnln(err)
 		return err

@@ -6,9 +6,11 @@ import (
 	json "github.com/bytedance/sonic"
 	log "github.com/sirupsen/logrus"
 	"io"
+	"math/rand"
 	"net/http"
 	"regexp"
 	"strings"
+	"time"
 )
 
 type TikTokUser struct {
@@ -95,11 +97,21 @@ func NewTikTokUser(url string, init bool, groupIds ...int64) (*TikTokUser, error
 	return user, nil
 }
 
+func randomString(length int) string {
+	str := "0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ"
+	rand.Seed(time.Now().UnixNano())
+	bytes := []byte(str)
+	var result []byte
+	for i := 0; i < length; i++ {
+		result = append(result, bytes[rand.Intn(len(bytes))])
+	}
+	return string(result)
+}
 func (tk *TikTokUser) GetLastAweme() error {
 	api := fmt.Sprintf("https://m.douyin.com/web/api/v2/aweme/post/?reflow_source=reflow_page&sec_uid=%s&count=21&max_cursor=0", tk.SecId)
 	client := &http.Client{}
 	req, err := http.NewRequest("GET", api, nil)
-	req.Header.Set("User-Agent", "Mozill/a/5.0 (iPhone; CPU iPhone OS 13_2_3 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/13.0.3 Mobile/15E148 Safari/604.1 Edg/108.0.0.0")
+	req.Header.Set("User-Agent", "Mozill/a/5.0 (iPhone; CPU iPhone OS 13_2_3 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/13.0.3 Mobile/15E148 Safari/604.1 Edg/108.0.0.0"+ randomString(5))
 	resp, err := client.Do(req)
 	if err != nil {
 		log.Warnln(err)
@@ -108,7 +120,7 @@ func (tk *TikTokUser) GetLastAweme() error {
 	defer resp.Body.Close()
 	body, err := io.ReadAll(resp.Body)
 	if err != nil {
-		log.Warnln("[抖音推送] 读取响应失败")
+		log.Warnln("读取响应失败")
 		return err
 	}
 	var ttinfo TikTokInfo
@@ -122,12 +134,12 @@ func (tk *TikTokUser) GetLastAweme() error {
 		return nil
 	}
 	tk.LastAweme = al.MaxAwemeId()
+	log.Warnln(tk.LastAweme.AwemeId2Uinit())
 	return nil
 }
 
 func (tk *TikTokUser) Listen() {
 	for err := tk.GetLastAweme(); err != nil; {
-		//log.Warnln(err)
 		log.Warnln(err)
 		time.Sleep(time.Second * 5)
 	}
@@ -135,12 +147,15 @@ func (tk *TikTokUser) Listen() {
 	tk.IsListed = true
 	for tk.IsListed {
 		temp := tk.LastAweme.AwemeId2Uinit()
+		//for err := tk.GetLastAweme(); err != nil; {
+		//	//log.Warnln(err)
+		//}
 		_ = tk.GetLastAweme()
 		if tk.LastAweme.AwemeId2Uinit() > temp {
-			log.Warnf("[抖音推送] 用户 %s 抖音新作品 %s %s", tk.Name, tk.LastAweme.Desc, tk.LastAweme.AwemeId)
+			//log.Println(tk.LastAweme.Desc, tk.LastAweme.AwemeId)
+			log.Printf("[抖音推送] 用户 %s 抖音新作品 %s %s", tk.Name, tk.LastAweme.Desc, tk.LastAweme.AwemeId)
 			tk.AwemeChan <- tk.LastAweme
 		}
-		time.Sleep(time.Second * 2)
 	}
 	close(tk.AwemeChan)
 }

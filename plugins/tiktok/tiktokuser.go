@@ -128,6 +128,8 @@ func (tk *TikTokUser) GetLastAweme() error {
 func (tk *TikTokUser) Listen() {
 	for err := tk.GetLastAweme(); err != nil; {
 		//log.Warnln(err)
+		log.Warnln(err)
+		time.Sleep(time.Second * 5)
 	}
 	_ = tk.GetLastAweme()
 	tk.IsListed = true
@@ -138,6 +140,7 @@ func (tk *TikTokUser) Listen() {
 			log.Warnf("[抖音推送] 用户 %s 抖音新作品 %s %s", tk.Name, tk.LastAweme.Desc, tk.LastAweme.AwemeId)
 			tk.AwemeChan <- tk.LastAweme
 		}
+		time.Sleep(time.Second * 2)
 	}
 	close(tk.AwemeChan)
 }
